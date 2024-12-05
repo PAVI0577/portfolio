@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NUPUR  Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      background-color: #111;
+      color: #fff;
+      overflow-x: hidden;
+      font-size: 16px;
+      line-height: 1.6;
+      height: 100vh;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      background-color: #1A1A1D;
+      padding: 20px 0;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+      z-index: 100;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      padding: 0;
+    }
+
+    nav ul li {
+      font-size: 18px;
+    }
+
+    nav ul li a {
+      color: #e74c3c;  /* Red accent color */
+      text-decoration: none;
+      font-size: 20px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 8px 20px;
+      border: 2px solid transparent;
+      border-radius: 30px;
+      transition: all 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: #111;
+      background-color: #e74c3c;
+      border-color: #e74c3c;
+      transform: scale(1.1);
+    }
+     /* Container for centering the GIF */
+     .gif-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60vh;
+            background-color: background-color#f32b2b;
+        }
+
+        /* Styling the GIF */
+        .gif-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px; /* Optional: to add rounded corners to the GIF */
+        }
+
+    section {
+      padding: 100px 20px;
+      text-align: center;
+      position: relative;
+      opacity: 0;
+      animation: fadeInUp 1.5s forwards;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    h1, h2 {
+      font-size: 3.5em;
+      text-transform: uppercase;
+      color: #e74c3c; /* Red accent color */
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+      letter-spacing: 3px;
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeText 1s ease-in forwards;
+    }
+
+    p {
+      font-size: 1.2em;
+      margin-bottom: 40px;
+      color: #ccc;
+      line-height: 1.6;
+      opacity: 0;
+      animation: fadeText 2s ease-in forwards;
+    }
+
+    #home {
+      background: #111 url('https://via.placeholder.com/1920x1080/000000/ffffff?text=Welcome+To+My+Portfolio') no-repeat center center/cover;
+      color: #fff;
+      height: 100vh;
+      background-size: cover;
+      animation: fadeIn 1.5s forwards;
+    }
+
+    #home h1, #home p {
+      position: relative;
+      z-index: 10;
+    }
+
+    #about {
+      background-color: #222;
+      color: #ccc;
+      animation: fadeIn 2s ease-in-out forwards;
+      padding-top: 40px;
+    }
+
+    #about .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    #about .image-container {
+      flex: 1;
+      max-width: 300px;
+      margin: 20px;
+      text-align: center;
+    }
+
+    #about .image-container img {
+      width: 100%;
+      border-radius: 50%;
+      border: 5px solid #e74c3c;  /* Red accent color */
+      transition: transform 0.3s ease;
+    }
+
+    #about .image-container img:hover {
+      transform: scale(1.1);
+    }
+
+    #about .bio {
+      flex: 2;
+      max-width: 600px;
+      margin: 20px;
+      text-align: left;
+    }
+
+    #about .bio h2 {
+      font-size: 2.5em;
+      color: #e74c3c;
+    }
+
+    #about .bio p {
+      font-size: 1.2em;
+      color: #ccc;
+    }
+
+    footer {
+      background-color: #222;
+      text-align: center;
+      padding: 20px;
+      color: #fff;
+      font-size: 1em;
+      letter-spacing: 1px;
+      margin-top: 40px;
+      position: relative;
+      z-index: 10;
+    }
+
+    footer a {
+      color: #e74c3c;  /* Red accent color */
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover {
+      color: #c0392b;  /* Darker red accent color */
+    }
+
+    /* Portfolio Section */
+    .portfolio-items {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px; /* Space between images */
+      margin-top: 50px;
+    }
+
+    .portfolio-item {
+      width: 300px;
+      text-align: center;
+      margin-bottom: 40px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .portfolio-item img {
+      width: 100%;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    .portfolio-item img:hover {
+      transform: scale(1.05);
+    }
+
+    .portfolio-item p {
+      font-size: 1.1em;
+      color: #fff;
+      background-color: #e74c3c;
+      padding: 10px;
+      border-radius: 0 0 8px 8px;
+      margin-top: 10px;
+    }
+
+    /* Modal (Popup) */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      overflow: auto;
+      padding-top: 60px;
+    }
+
+    .modal-content {
+      background-color: #333;
+      color: #fff;
+      margin: 5% auto;
+      padding: 20px;
+      border-radius: 10px;
+      width: 60%;
+      text-align: center;
+    }
+
+    .modal-content h3 {
+      margin-bottom: 20px;
+    }
+
+    .close {
+      color: #e74c3c;
+      font-size: 30px;
+      font-weight: bold;
+      position: absolute;
+      top: 10px;
+      right: 25px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: #fff;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeText {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+        /* Contact Form */
+        #contact form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    #contact input, #contact textarea {
+      padding: 10px;
+      border: 2px solid #e74c3c;
+      border-radius: 10px;
+      background-color: #222;
+      color: #fff;
+      font-size: 1.1em;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    #contact input:focus, #contact textarea:focus {
+      border-color: #f39c12;
+    }
+
+    #contact button {
+      padding: 12px;
+      font-size: 1.2em;
+      color: #fff;
+      background-color: #e74c3c;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    #contact button:hover {
+      background-color: #c0392b;
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Home Section -->
+  <section id="home">
+    <div class="container">
+     
+      <div class="gif-container">
+        <img src="NUPUR (1) - Copy.gif" alt="Funny GIF">
+        
+    </div>
+    <Br></Br>
+    <BR>
+    </BR><h1>TURNING IDEAS INTO DESIGNS</h1>
+      
+     
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <div class="container">
+      <div class="image-container">
+        <img src="my pic.jpg" alt="Your Picture">
+      </div>
+      <div class="bio">
+        <h2>About Me</h2>
+        <p> Hi, I'm Nupur! I'm a design student with a passion for creativity and visual storytelling. I love bringing ideas to life through illustrations, graphic design, and creative projects. Whether it's crafting unique designs, storyboarding, or exploring new artistic techniques, I’m always excited to push the boundaries of design. My goal is to create work that not only looks beautiful but also tells a meaningful story.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Section -->
+  <section id="portfolio">
+    <div class="container">
+      <h2>My Portfolio</h2>
+      <div class="portfolio-items">
+        <div class="portfolio-item" onclick="openModal('project1')">
+          <img src="BOX.jpg" alt="Project 1">
+          <p>Project 1: Typograhic packaging</p>
+        </div>
+        <div class="portfolio-item" onclick="openModal('project2')">
+          <img src="barraoque.png" alt="Project 2">
+          <p>Project 2: Digital Illustration</p>
+        </div>
+        <div class="portfolio-item" onclick="openModal('project3')">
+          <img src="vinyl cover .jpg" alt="Project 3">
+          <p>Project 3: Vinyl design</p>
+        </div>
+        <div class="portfolio-item" onclick="openModal('project4')">
+          <img src="worm.png" alt="Project 4">
+          <p>Project 4: Typograhic poster </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <button class="close" onclick="closeModal()">&times;</button>
+      <h3 id="modalTitle"></h3>
+      <p id="modalDescription"></p>
+    </div>
+  </div>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="container">
+      <h2>Contact Me</h2>
+      <form action="#" method="POST">
+        <input type="email" name="email" placeholder="Your Email" required>
+        <input type="text" name="phone" placeholder="Your Contact Number" required>
+        <textarea name="message" rows="6" placeholder="What do you want to say?" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; </p>
+    <p><a href="#home">Back to Top</a></p>
+  </footer>
+
+  <script>
+    // Modal functionality
+    function openModal(project) {
+      const modal = document.getElementById("modal");
+      const modalTitle = document.getElementById("modalTitle");
+      const modalDescription = document.getElementById("modalDescription");
+
+      if (project === 'project1') {
+        modalTitle.textContent = 'Packaging Design';
+        modalDescription.textContent = '  Eyeliner Packaging Design,This eyeliner packaging features a custom font I designed, paired with dynamic scribbles that mimic the fluid strokes of the eyeliner. The playful design reflects both the precision and creativity of the product, creating a bold and unique visual identity.';
+      } else if (project === 'project2') {
+        modalTitle.textContent = 'Baroque Packaging';
+        modalDescription.textContent = 'This facial cleanser packaging is inspired by the opulence and intricate details of Baroque art. The design features ornate patterns, elegant curves, and rich gold accents, bringing a luxurious and timeless feel to the product. The Baroque influence is reflected in both the ornate style and the sophisticated color palette, aiming to evoke a sense of indulgence and high-end skincare.';
+      } else if (project === 'project3') {
+        modalTitle.textContent = 'Branding Identity';
+        modalDescription.textContent = 'This vinyl cover design for The Buggles hit song *Video Killed the Radio Star* blends a retro aesthetic with a modern twist. Featuring a bold skull illustration, the design nods to the songs futuristic themes while embracing a vintage, 80s vibe. The use of neon colors, geometric shapes, and the skull imagery reflects the clash between old-school radio and the rise of video media. The overall design captures the song’s iconic message and the bands innovative sound, offering a visually striking homage to a groundbreaking era in music.';
+      } else if (project === 'project4') {
+        modalTitle.textContent = 'Typographic Poster';
+        modalDescription.textContent = ' The theme of the poster revolves around Ashnikkos dynamic presence and the essence of her music. Bubbly text and an ice blue color scheme are chosen to convey her playful yet edgy vibe.';
+      }
+
+      modal.style.display = "block";
+    }
+
+    function closeModal() {
+      document.getElementById("modal").style.display = "none";
+    }
+  </script>
+</body>
+</html>
